@@ -1,0 +1,151 @@
+Morfessor Categories-MAP, version 0.9.2
+---------------------------------------
+
+1. General
+
+This package contains the implementation of the so-called Morfessor
+Categories-MAP algorithm for the segmentation of words in an
+unannotated text corpus into morpheme-like units. The algorithm is
+described in the following publications:
+
+* Mathias Creutz and Krista Lagus (2005). Inducing the Morphological
+Lexicon of a Natural Language from Unannotated Text. In Proceedings
+of the International and Interdisciplinary Conference on Adaptive
+Knowledge Representation and Reasoning (AKRR'05), pages 106-113,
+Espoo, June. http://www.cis.hut.fi/mcreutz/papers/Creutz05akrr.pdf
+
+* Mathias Creutz (2006). Induction of the Morphology of Natural
+Language: Unsupervised Morpheme Segmentation with Application to
+Automatic Speech Recognition. Doctoral thesis, Dissertations in
+Computer and Information Science, Report D13, Helsinki Univeristy of
+Technology, Espoo, Finland. http://lib.tkk.fi/Diss/2006/isbn9512282119/
+
+* Mathias Creutz and Krista Lagus. Unsupervised Models for Morpheme
+Segmentation and Morphology Learning. ACM Transactions on Speech and
+Language Processing (in press).
+
+
+2. Conditions of use
+
+All software supplied with this package is released under the GNU
+General Public License.  This program is free software; you can
+redistribute it and/or modify it under the terms of the GNU General
+Public License as published by the Free Software Foundation; either
+version 2, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License (below or at http://www.gnu.org/licenses/
+gpl.html) for more details.
+
+The users of Morfessor Categories-MAP are requested to refer to one of
+the above-mentioned publications in their own scientific publications.
+
+
+3. Platform and contents
+
+The software consists of two Makefiles (GNU Make required). The
+Makefiles call Linux shell commands as well as Perl scripts.
+
+The Perl scripts are located in the bin/ directory. Modify the first
+line of each script in case your Perl interpreter is not located at
+/usr/bin/perl.
+
+The Makefile in the directory train/ contains the Morfessor
+Categories-MAP algorithm. The algorithm learns a segmentation model
+from scratch and segments the words in the data into morpheme-like
+units. In addition, each morph (word segment) is tagged with a
+category: PRE (prefix), STM (stem), SUF (suffix). (At intermediate
+stages there is a fourth category, ZZZ, which stands for noise or
+"non-morpheme".)
+
+The Makefile in the directory test/ makes use of an existing model
+(trained using the Makefile in the train/ directory) to split
+words. This makes it possible to segment new words according to the
+model without having to train a new model from scratch.
+
+
+4. Test the system
+
+The Makefiles contain instructions for the user in the beginning of
+the files. Read the instructions thoroughly.
+
+The train/ directory contains two files in addition to the Makefile:
+mydata.gz and segmentation.final.MODEL.gz. By running "make" in the
+train/ directory you should eventually have a file named
+segmentation.final.gz, which is the output of Morfessor
+Categories-MAP. (For me this took 25 minutes on my desktop computer, a
+900 MHz AMD Duron from 2001.)  In principle, your
+segmentation.final.gz should be identical to
+segmentation.final.MODEL.gz. The time stamps written to the files will
+differ, however, and it is probable that the random number generator
+of your system does not give the same sequence of random numbers as
+our system.  Therefore, small differences in your output and the
+example (model) output are likely.
+
+Then, perform the same type of test in the test/ directory. By running
+"make" in the test/ directory you should get a file named
+segmentation.final.gz, which should be almost identical to
+segmentation.final.MODEL.gz in the same directory.
+
+
+5. Format of the output files
+
+The output files contain segmented words, one word per line. The word
+is preceded by a number indicating its frequency of occurrence in the
+data. Each word segment (morph) is tagged with a category. For
+instance, the segmentations and taggings of the Finnish words "alueen,
+alueita," and "aluksi" could be:
+
+...
+4 alue/STM + en/SUF
+2 alue/STM + ita/SUF
+3 aluksi/STM
+...
+
+Lines preceded by a number sign (#) are comments.
+
+
+6. Your own experiments
+
+In order to run your own experiments, you will have to modify some
+things in the Makefiles: possibly the locations of files and
+directories and the value of the parameter PPLTHRESH.
+
+The software should not be difficult to use, but it is not a finalized
+professional product. Users are expected to have some knowledge about
+Linux and Makefiles.
+
+
+7. Restrictions on the character set
+
+In your input, line breaks need to consist of the newline character
+\n. Remove all carriage return characters \r (which may occur in your
+file if you have processed it using Windows). No word may contain
+whitespace, slash (/), asterisk (*), plus (+), or number sign (#)
+characters.  UTF-8 encoding is not supported. All characters are
+(8-bit) bytes.
+
+
+Good luck,
+
+Mathias Creutz (D. Sc.) [Mathias.Creutz@tkk.fi, www.cis.hut.fi/~mcreutz]
+Adaptive Informatics Research Centre, Helsinki University of Technology
+P.O.Box 5400 (Konemiehentie 2, Espoo), FIN-02015 TKK, Finland
+Tel: +358 9 451 4199  Fax: +358 9 451 4602 or +358 9 451 3277
+
+-- -- --
+
+Version history:
+
+Morfessor Categories-MAP 0.9       Original version. 18 Oct 2006
+Morfessor Categories-MAP 0.9.1     Added documentation about characters that
+                                   cause trouble if they occur in words in the
+                                   input. Also removed a small bug in
+                                   test/Makefile, which caused plus signs to
+                                   cause trouble. 26 Oct 2006
+Morfessor Categories-MAP 0.9.2     Some bug fixes, partly due to characters
+                                   causing trouble, but should work now:
+                                   comma (,) and double quotation mark (").
+				   29 Jan 2007
