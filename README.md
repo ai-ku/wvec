@@ -13,7 +13,9 @@ words. Using this repository you can:
 
 [3]. The AI-KU System at the SPMRL 2013 Shared Task : Unsupervised Features for Dependency Parsing, In Proceedings of the Fourth Workshop on Statistical Parsing of Morphologically-Rich Languages, pp 78--85, Seattle, Washington, USA, October. Association for Computational Linguistics, [Paper](http://aclweb.org/anthology//W/W13/W13-4909.pdf), [Word Embeddings](https://github.com/wolet/sprml13-word-embeddings), [bib](http://aclweb.org/anthology//W/W13/W13-4909.bib)
 
-[4]. Context-Dependent Word Embeddings using Substitue Words, *Work In Progress*
+[4] SCODE Word Vectors , *Submitted*, [Word Vectors For 7 Languages](https://www.dropbox.com/sh/u8fte20ursfh2u5/AACQAcAyUYVB_DPwK9DAVjJ4a)
+
+[5]. Context-Dependent Word Embeddings using Substitue Words, *Work In Progress*
 
 #### Setting-Up The Environment
 
