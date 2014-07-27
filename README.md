@@ -1,22 +1,43 @@
-## Word Embeddings using Substitute Words##
+## SCODE Word Embeddings using Substitute Words##
 
-This tool provides a lexical co-occurrence based word embeddings using a substitute
-words. Using this repository you can:
+This repository provides a tool to induce word vectors using substitute words.
+Using this repository you can:
 
-- Generate word-type embeddings described in [1,3]
-- Generate word-token embeddings described in [2]
-- Generate word-token embeddings using different methods or using your favorite word embeddings [4]
+- Generate word-type embeddings described in [1,3,4]
+- Generate word-token embeddings described in [2,5]
 
 [1]. Learning Syntactic Categories Using Paradigmatic Representations of Word Context, In Proceedings of the 2012 Conference on Empirical Methods in Natural Language Processing (EMNLP-CONLL 2012), Jeju, Korea, July. Association for Computational Linguistics, [Paper, Presentation & Code](http://www.denizyuret.com/2012/05/learning-syntactic-categories-using.html), [bib](http://aclweb.org/anthology/D/D12/D12-1086.bib). 
 
-[2]. Word Context and Token Representations from Paradigmatic Relations and Their Application to Part-of-Speech Induction, [Paper, Presentation](http://www.denizyuret.com/2013/09/enis-rfat-sert-ms-2013.html)
+[2]. Word Context and Token Representations from Paradigmatic Relations and Their Application to Part-of-Speech Induction, [Paper & Presentation](http://www.denizyuret.com/2013/09/enis-rfat-sert-ms-2013.html)
 
 [3]. The AI-KU System at the SPMRL 2013 Shared Task : Unsupervised Features for Dependency Parsing, In Proceedings of the Fourth Workshop on Statistical Parsing of Morphologically-Rich Languages, pp 78--85, Seattle, Washington, USA, October. Association for Computational Linguistics, [Paper](http://aclweb.org/anthology//W/W13/W13-4909.pdf), [Word Embeddings](https://github.com/wolet/sprml13-word-embeddings), [bib](http://aclweb.org/anthology//W/W13/W13-4909.bib)
 
-[4] SCODE Word Vectors , *Submitted*, [Word Vectors For 7 Languages](https://www.dropbox.com/sh/u8fte20ursfh2u5/AACQAcAyUYVB_DPwK9DAVjJ4a)
+[4] Substitute Based SCODE Word Embeddings in Supervised NLP Tasks, *Submitted*, [Word Vectors For 7 Languages](https://www.dropbox.com/sh/u8fte20ursfh2u5/AACQAcAyUYVB_DPwK9DAVjJ4a)
 
 [5]. Context-Dependent Word Embeddings using Substitue Words, *Work In Progress*
 
+### Other Word Vectors
+
+Here is a list of other word vectors : 
+- Turian, [Word representations: A simple and general method for semi-supervised learning](http://metaoptimize.com/projects/wordreprs/)
+- Dhillon, [Multi-View Learning of Word Embeddings via CCA](http://www.pdhillon.com/publications.html)
+- Mikolov, [Recurrent neural network based language model](http://www.fit.vutbr.cz/~imikolov/rnnlm/)
+- Mikolov, [Efficient Estimation of Word Representations in Vector Space](https://code.google.com/p/word2vec/)
+- Huang, [Improving Word Representations Via Global Context And Multiple Word Prototypes](http://www.socher.org/index.php/Main/ImprovingWordRepresentationsViaGlobalContextAndMultipleWordPrototypes)
+- Stratos, [A Spectral Algorithm for Learning Class-Based n-gram Models of Natural Language](https://github.com/karlstratos/cca)
+- Yogatama, [Learning Word Representations with Hierarchical Sparse Coding](http://www.ark.cs.cmu.edu/dyogatam/wordvecs/)
+- Faruqui, [Improving Vector Space Word Representations Using Multilingual Correlation](https://github.com/mfaruqui/eacl14-cca)
+- Lebret, [Word Embeddings through Hellinger PCA](http://lebret.ch/words/)
+
+#### Semi-Supervised Word Vectors
+
+Below is a list of word vectors using dependency pairs for inducing representations.
+
+- Murphy, [Learning Effective and Interpretable Semantic Models using Non-Negative Sparse Embedding](http://www.cs.cmu.edu/~bmurphy/NNSE/)
+- Levy, [Dependency-Based Word Embeddings](http://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/)
+- Bansal, [Tailoring Continuous Word Representations for Dependency Parsing](ttic.edu/bansal/data/syntacticEmbeddings.zip )
+
+ 
 #### Setting-Up The Environment
 
 After cloning the repository, the first thing to do is initializing the binary directory.
