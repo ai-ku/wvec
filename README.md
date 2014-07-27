@@ -176,7 +176,7 @@ distribution instead of <word,substitute word> pairs.
 
     make YOUR-SUB-CORPUS.XsubX.gz X1=YOUR-EMBEDDING1.gz X2=YOUR-EMBEDDING2.gz
 
-#### Using Morphologic and Orthographic Features
+## 4 - Using Morphologic and Orthographic Features
 
 If you want to generate word embeddings using Orthographic and Morphologic
 features using [Morfessor](http://www.cis.hut.fi/projects/morpho/), we suggest
