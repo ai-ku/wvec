@@ -38,7 +38,7 @@ Below is a list of word vectors using dependency pairs for inducing representati
 - Bansal, [Tailoring Continuous Word Representations for Dependency Parsing](ttic.edu/bansal/data/syntacticEmbeddings.zip )
 
  
-#### Setting-Up The Environment
+## 0 - Setting-Up The Environment
 
 After cloning the repository, the first thing to do is initializing the binary directory.
 Simlpy go to /run directory and run this command: 
@@ -51,7 +51,7 @@ also copy the script files unde /bin directory.
 Then, in order to generate word substitutes you need a Language Model(LM) in SRILM format.
 Install [SRILM](http://www.speech.sri.com/projects/srilm/download.html) and set the SRILM_PATH variable in the Makefile. 
 
-##### Generate Type & Token Vectors - A Shortcut:
+## 1 - Generate Type & Token Vectors - A Shortcut:
 
 This section here to generate word embeddings embeddings right away.
 However, if you want to know how they are generated please skip
@@ -76,7 +76,7 @@ or you can combine your favorite word embeddings:
 
     make YOUR-TARGET-CORPUS.XmixX.gz LMFILE=YOUR-LM-CORPUS DIM=25 X1=YOUR-EMBEDDINGS1.gz X2=YOUR-EMBEDDINGS2.gz 
 
-#### How to Generate Word-Type Embeddings?
+## 2 - How to Generate Word-Type Embeddings?
 
 First train an LM using a large corpus. Tokenize your corpus 
 into YOUR-LM-CORPUS.tok and place it under /data and gzip tokenized 
@@ -122,12 +122,12 @@ change a variety of parameters of SCODE.
 
 If you only interested in word-type embeddings you are good to go.
 
-#### How to Generate Word-Token (Context-Dependent) Embeddings?
+## 3 - How to Generate Word-Token (Context-Dependent) Embeddings?
 
 After generating word-type embeddings, you can generate context
 dependent word embeddings in a couple of different ways.
 
-##### Enis Sert's KNN Based Vectors(2):
+### Enis Sert's KNN Based Vectors(2):
 
 First find the k-nearest-neighbors(k=128).
 
@@ -140,9 +140,9 @@ Run following command to generate 50-dimension word-token vectors:
 
     make YOUR-SUB-CORPUS.knn.XY.gz DIM=25
 
-##### Substitute Pairs Based Vectors:
+### Substitute Pairs Based Vectors:
 
-###### Using Substitute Word Embeddings of SCODE Sphere
+#### Using Substitute Word Embeddings of SCODE Sphere
 
 You can use <word,substitue word> pairs (<X,Y> where X is target word, Y is substitute word)
 and substite word embeddings of SCODE sphere to generate word-token
@@ -159,7 +159,7 @@ target words for substitute words:
 
 These will generate 25+25-dimension word-token vectors.
 
-###### Using Any Word Embeddings You Like
+#### Using Any Word Embeddings You Like
 
 You can combine two different word embeddings using <word,substitute word>
 pairs to generate word-token embeddings. First generate unk-pair.gz
@@ -169,7 +169,7 @@ then gzip your favorite word embeddings [1](https://code.google.com/p/word2vec/)
 
 Of course you can use the same word embedding for X1 and X2.
 
-##### Substitute Distribution Based Vectors:
+### Substitute Distribution Based Vectors:
 
 The generalization of the previous method is using substitute
 distribution instead of <word,substitute word> pairs.
@@ -199,8 +199,7 @@ or
 <code> make YOUR-SUB-CORPUS.knn.XY<b>+f</b>.gz DIM=25 **FEATUREFLAG=+f** **FEATFILE=YOUR-FEAT-CORPUS**</code>
 
     
-#####TODO:
+## TODO:
 
 - Write a better README.
 - Word Features
-- Mali's Best Settings For English
