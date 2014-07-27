@@ -49,7 +49,13 @@ This will clones some repositories needed for a successfull run and install them
 also copy the script files unde /bin directory.
 
 Then, in order to generate word substitutes you need a Language Model(LM) in SRILM format.
-Install [SRILM](http://www.speech.sri.com/projects/srilm/download.html) and set the SRILM_PATH variable in the Makefile. 
+Install [SRILM](http://www.speech.sri.com/projects/srilm/download.html) and set the SRILM_PATH variable in the Makefile.
+
+A one-liner procuding word vectors is as follows, just change the ones in the capital letters accordingly: 
+
+    zcat ../data/YOUR_CORPUS.tok.gz | fastsubs-omp -n 100  -p 1.0 YOUR_LM.lm.gz | grep -v '^</s>' | wordsub-n -s 1 -n 100  | scode-online -v2 -d NUMBER_OF_DIMENSION -s 1  | perl -ne 'print if s/^0://' | cut -f1,3- | tr '\t' ' ' | gzip > YOUR_WVEC.gz
+
+This target is at the end of the run/Makefile . But, one may need a detailed description about what's going on. Let's move on.
 
 ## 1 - Generate Type & Token Vectors - A Shortcut:
 
