@@ -1,4 +1,4 @@
-all: wkmeans fastsubs scode perl python dists
+all: concatSubs wkmeans fastsubs scode perl python dists
 
 ### Reprository Check-out Commands
 ## If the latest version is required then do not set the corresponding
@@ -36,6 +36,9 @@ scode: check
 	test -e ../src/scode || (cd ../src/ ; git clone ${SCODE_GIT_REPO})
 	cd ../src/scode; make
 	test -e $@ || ln -s ../src/scode/scode .
+concatSubs: check
+	g++ -O3 -o concatSubs ../src/concatSubs.cpp -lm
+
 perl: check
 	test -e `ls *.pl`  || ls *.pl | xargs -I '{}' unlink '{}'
 	ln -s ../src/*.pl .
@@ -48,4 +51,3 @@ check:
 
 clean:
 	-rm wkmeans dists fastsubs fastsubs-omp wordsub wordsub-omp scode *.pl *.py 
-#	test -e ../src/fastsubs || (cd ../src/ ; git clone ${FASTSUBS_GIT_REPO} ; git checkout ${FASTSUBS_GIT_TAG})

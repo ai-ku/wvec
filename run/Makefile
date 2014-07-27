@@ -111,7 +111,7 @@ LENGTH=`zcat ../data/$*.tok.gz | wc -w`
 %.XplusY$(FEATUREFLAG).gz: %.unk-pairs$(FEATUREFLAG).gz %.unk-scode-$(DIM)$(FEATUREFLAG).gz
 	Xplus.py $< $*.unk-scode-$(DIM)$(FEATUREFLAG).gz ${LENGTH} y | gzip > $@
 %.XsubX$(FEATUREFLAG).gz: %.sub.gz $(X1) $(X2)
-	concatSubs.py $< $(X1) $(X2) | gzip > $@
+	concatSubs $< $(X1) $(X2) | gzip > $@
 KNN=128 # number of nearest neighbors to compute
 KNN_METRIC=4 # 0=euclid, 1=cosine 2=manhattan 3=maximum 4=jensen 5=zero-mean covariance
 KNN_OPTIONS=-k ${KNN} -d ${KNN_METRIC} -p ${NCPU} -v
