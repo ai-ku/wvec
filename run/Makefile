@@ -40,7 +40,7 @@ FS_NSUB=100 # go until you have this many substitutes
 FS_PSUB=1.0 # or this much cumulative probability
 FS_OPTIONS=-n ${FS_NSUB} -p ${FS_PSUB}
 
-export OMP_NUM_THREADS=24
+export OMP_NUM_THREADS=10
 LMFILE=
 #%.sub.gz: %.tok.gz %.lm.gz  %.ppl.gz %.unk 
 %.sub.gz: ../data/%.tok.gz $(LMFILE).lm.gz
@@ -143,36 +143,17 @@ SHELL:=/bin/bash
 	zcat $*.words.gz > $*.words
 	paste $*.words $< | gzip > $@
 	rm $*.words
-#___________________________________________________________________________________________
-#EVALUATION ON POS INDUCTION - TODO AFTER +FEATURES
 
-### K-Means Options
-# KM_R=2
-# KM_OPTIONS= -k 45 -r $(KM_R) -l -v -s $(SEED)
+#_____________________________________________________
+# ONE-line Induction
 
-# UNK=
+SCONLINE_OPTIONS=-v2 -d $(DIM) -s ${SEED}
+%.type-${DIM}.embeddings.gz : ../data/%.tok.gz ${LMFILE}.lm.gz
+	zcat $< | fastsubs-omp ${FS_OPTIONS} $(LMFILE).lm.gz | grep -v '^</s>' | wordsub-n -s ${SEED} -n ${WORDSUB} | scode-online ${SCONLINE_OPTIONS} | perl -ne 'print if s/^0://' | cut -f1,3- | tr '\t' ' ' | gzip > $@
 
-# %.type.embedded: %.$(UNK)type.gz %.words.gz %.pos.gz
-# 	zcat $< > $*.typed
-# 	concatSingle.py wsj.words.gz $*.typed > $@
 
-# TOKEN_EMBED=
-# %.token.embedded: %.$(TOKEN_EMBED).gz
-# 	zcat $< > $@
-
-# %.$(TOKEN_EMBED).eval: %.token.embedded
-# 	cat $< | wkmeans ${KM_OPTIONS} > $*.clusters
-# 	cat $*.clusters | tr -t ' ' '\t' | cut -f2 | eval.pl -m -v -g wsj.pos.gz 2> $@
-# 	rm $*.clusters
-# %.$(UNK)type.eval: %.type.embedded 
-# 	cat $< | wkmeans ${KM_OPTIONS} > $*.clusters
-# 	cat $*.clusters | tr -t ' ' '\t' | cut -f2 | eval.pl -m -v -g wsj.pos.gz 2> $@
-# 	rm $*.clusters
-#___________________________________________________________________________________________
 clean: #TODO
-	-rm -i *.lm.gz *.sub.gz *.knn.gz
-	-rm *.*vocab.gz
-	-rm *.*pairs.gz *.*scode.gz
-	cd ../bin; make clean #TODO
-	cd ../src; make clean #TODO
-
+	rm -f *.lm.gz *.sub.gz *.knn.gz
+	rm -f *.*vocab.gz
+	rm -f *.*pairs.gz *.*scode.gz
+	cd ../bin; make clean

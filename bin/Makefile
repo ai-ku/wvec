@@ -29,16 +29,17 @@ fastsubs: check
 	cd ../src/fastsubs; make
 	test -e $@ || ln -s ../src/fastsubs/fastsubs .
 	test -e wordsub || ln -s ../src/fastsubs/wordsub .
-	test -e wordsub-omp || ln -s ../src/fastsubs/wordsub-omp .
+	test -e wordsub-n || ln -s ../src/fastsubs/wordsub-n .
 	test -e fastsubs-omp || ln -s ../src/fastsubs/fastsubs-omp .
 
 scode: check
 	test -e ../src/scode || (cd ../src/ ; git clone ${SCODE_GIT_REPO})
 	cd ../src/scode; make
-	test -e $@ || ln -s ../src/scode/scode .
-concatSubs: check
-	g++ -O3 -o concatSubs ../src/concatSubs.cpp -lm
+	test -e $@ || ln -s ../src/scode/scode ../src/scode/scode-online .
 
+concatSubs: check
+	test -e ../src/concatSubs || g++ -O3 -o ../src/concatSubs ../src/concatSubs.cpp -lm
+	ln -s ../src/concatSubs .
 perl: check
 	test -e `ls *.pl`  || ls *.pl | xargs -I '{}' unlink '{}'
 	ln -s ../src/*.pl .
@@ -50,4 +51,5 @@ check:
 	true
 
 clean:
-	-rm wkmeans dists fastsubs fastsubs-omp wordsub wordsub-omp scode *.pl *.py 
+	find . -type l | xargs -I '{}' rm -f '{}'
+	rm -rf ../src/scode ../src/fastsubs ../src/dist ../src/wkmeans ../src/concatSubs
